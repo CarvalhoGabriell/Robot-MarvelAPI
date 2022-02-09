@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.9.7 on win32)" generated="20220208 22:34:30.632" rpa="false" schemaversion="2">
+<suite id="s1" name="CreateChareters" source="C:\Courses_Qaninja\MarvelAPI\CreateChareters.robot">
+<test id="s1-t1" name="Deve Cadastrar personagem">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{account}</var>
+<arg>email=gabiru@gmail.com</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220208 22:34:30.767" level="INFO">&amp;{account} = { email=gabiru@gmail.com }</msg>
+<status status="PASS" starttime="20220208 22:34:30.766" endtime="20220208 22:34:30.767"/>
+</kw>
+<kw name="POST" library="RequestsLibrary">
+<var>${payload}</var>
+<arg>http://marvel.qaninja.academy/accounts</arg>
+<arg>json=${account}</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220208 22:34:36.522" level="INFO">POST Request : url=http://marvel.qaninja.academy/accounts 
+ path_url=/accounts 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '29', 'Content-Type': 'application/json'} 
+ body=b'{"email": "gabiru@gmail.com"}' 
+ </msg>
+<msg timestamp="20220208 22:34:36.522" level="INFO">POST Response : url=http://marvel.qaninja.academy/accounts 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '41', 'Etag': 'W/"29-ES9LjzGGH5xqmkZ5pvZQAQiv/v8"', 'Date': 'Wed, 09 Feb 2022 01:34:37 GMT', 'Via': '1.1 vegur'} 
+ body={"client_key":"6202fe74751f850016db34f7"} 
+ </msg>
+<msg timestamp="20220208 22:34:36.523" level="INFO">${payload} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220208 22:34:30.767" endtime="20220208 22:34:36.523"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${client_key}</var>
+<arg>${payload.json()}[client_key]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220208 22:34:36.525" level="INFO">${client_key} = 6202fe74751f850016db34f7</msg>
+<status status="PASS" starttime="20220208 22:34:36.524" endtime="20220208 22:34:36.525"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>client_key=${client_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220208 22:34:36.525" level="INFO">${header} = {'client_key': '6202fe74751f850016db34f7'}</msg>
+<status status="PASS" starttime="20220208 22:34:36.525" endtime="20220208 22:34:36.526"/>
+</kw>
+<kw name="Create Characters" library="factory_character">
+<var>&amp;{characters}</var>
+<msg timestamp="20220208 22:34:36.526" level="INFO">&amp;{characters} = { name=Homem de Ferro | aliases=Iron Man | age=50 | team=Avengers | active=False }</msg>
+<status status="PASS" starttime="20220208 22:34:36.526" endtime="20220208 22:34:36.526"/>
+</kw>
+<kw name="POST" library="RequestsLibrary">
+<arg>http://marvel.qaninja.academy/characters</arg>
+<arg>json=${characters}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20220208 22:34:36.917" level="INFO">POST Request : url=http://marvel.qaninja.academy/characters 
+ path_url=/characters 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'client_key': '6202fe74751f850016db34f7', 'Content-Length': '97', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Homem de Ferro", "aliases": "Iron Man", "age": 50, "team": "Avengers", "active": false}' 
+ </msg>
+<msg timestamp="20220208 22:34:36.918" level="INFO">POST Response : url=http://marvel.qaninja.academy/characters 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '156', 'Etag': 'W/"9c-y81AGJrNPSutSxFAQXdk9tx+mBw"', 'Date': 'Wed, 09 Feb 2022 01:34:37 GMT', 'Via': '1.1 vegur'} 
+ body={"_id":"62031a2d830fd80016a79c35","name":"Homem de Ferro","age":50,"aliases":"Iron Man","team":"Avengers","active":false,"owner":"6202fe74751f850016db34f7"} 
+ </msg>
+<status status="PASS" starttime="20220208 22:34:36.526" endtime="20220208 22:34:36.918"/>
+</kw>
+<status status="PASS" starttime="20220208 22:34:30.766" endtime="20220208 22:34:36.919"/>
+</test>
+<doc>Suite de teste para cadastrar personagem na API da marvel.</doc>
+<status status="PASS" starttime="20220208 22:34:30.633" endtime="20220208 22:34:36.920"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="CreateChareters">CreateChareters</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
