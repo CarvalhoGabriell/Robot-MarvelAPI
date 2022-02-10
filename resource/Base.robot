@@ -8,6 +8,12 @@ ${BASE_URL}         http://marvel.qaninja.academy
 
 
 *** Keywords ***
+Super Setup
+    [Arguments]        ${email_user}
+    Authentification Key User         ${email_user}
+    Back To the Past 
+
+
 Authentification Key User
     [Arguments]        ${email_user}
     

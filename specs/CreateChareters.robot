@@ -2,8 +2,7 @@
 Documentation        Suite de teste para cadastrar personagem na API da marvel.
 Resource       ../resource/Base.robot
 
-Suite Setup    Run Keywords   Authentification Key User   gabiru@gmail.com
-...            AND           Back To the Past
+Suite Setup        Super Setup        gabiru@gmail.com  
 *** Test Cases ***
 Cenário 1: Deve Cadastrar personagem
    
