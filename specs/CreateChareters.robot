@@ -19,4 +19,4 @@ Cenário 2: Nao deve cadastra personagem com mesmo Nome
 
     ${response}         POST new personagem    ${characters}
     Status Should Be    409    ${response}
-    Should Be Equal     Character already exists :(    ${response.json()}[error]
+    Should Be Equal     ${response.json()}[error]     Character already exists :(
